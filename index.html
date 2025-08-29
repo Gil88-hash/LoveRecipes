@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LoveRecipes</title>
+  <style>
+    /* --- Page Styling --- */
+    body {
+      font-family: Arial, sans-serif;
+      background: #add8e6; /* LightBlue */
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #4682b4; /* SteelBlue */
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+    }
+
+    header h1 {
+      margin: 0.2rem 0;
+    }
+
+    /* --- Search Bar --- */
+    #search {
+      display: block;
+      margin: 1rem auto;
+      padding: 0.5rem;
+      width: 80%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #ff914d;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e07a34;
+    }
+
+    /* --- Recipe Cards --- */
+    .recipe-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 600px;
+      transition: transform 0.3s;
+    }
+    .recipe-card:hover {
+      transform: scale(1.02);
+    }
+    .recipe-details {
+      display: none;
+      margin-top: 0.5rem;
+    }
+
+    /* --- Dark Mode --- */
+    .dark {
+      background: #222;
+      color: #eee;
+    }
+    .dark header {
+      background: #333;
+    }
+    .dark .recipe-card {
+      background: #444;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Favorite Recipes</h1>
+    <p>Hi! This is where I store recipes I tried and loved.</p>
+    <input type="text" id="search" placeholder="Search recipes..." onkeyup="searchRecipes()">
+    <button onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+  </header>
+
+  <!-- Recipe Example: Fudgy Ube Brownies -->
+  <div class="recipe-card">
+    <h2 onclick="toggleRecipe('ubeBrownies')">💜 Fudgy Ube Brownies</h2>
+    <div id="ubeBrownies" class="recipe-details">
+      <p>This recipe is from <em>Takes Two Eggs</em></p>
+      <h3>Ingredients:</h3>
+      <ul>
+        <li>10 tablespoons (120 g) unsalted butter</li>
+        <li>½ cup (112 oz) white chocolate chips</li>
+        <li>¼ cup (72 g) ube halaya jam</li>
+        <li>3 large eggs (room temperature)</li>
+        <li>1 teaspoon (8 g) ube extract</li>
+        <li>½ teaspoon (4 g) vanilla extract</li>
+        <li>¼ cup (55 g) granulated sugar</li>
+        <li>¾ cup (150 g) light brown sugar (packed)</li>
+        <li>¾ cup (104 g) all-purpose flour</li>
+        <li>¾ teaspoon (3 g) salt</li>
+      </ul>
+      <h3>Instructions:</h3>
+      <p>Mix ingredients, pour into a baking dish, and bake until fudgy and delicious!</p>
+    </div>
+  </div>
+
+  <!-- You can duplicate this .recipe-card div for more recipes -->
+
+  <script>
+    // Expand/collapse recipe
+    function toggleRecipe(id) {
+      const recipe = document.getElementById(id);
+      recipe.style.display = recipe.style.display === "block" ? "none" : "block";
+    }
+
+    // Search recipes
+    function searchRecipes() {
+      const input = document.getElementById("search").value.toLowerCase();
+      const cards = document.getElementsByClassName("recipe-card");
+      for (let card of cards) {
+        let title = card.querySelector("h2").innerText.toLowerCase();
+        card.style.display = title.includes(input) ? "block" : "none";
+      }
+    }
+
+    // Dark mode toggle
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+  </script>
+</body>
+</html>
